@@ -19,11 +19,11 @@
         android:layout_gravity="center" />
 
     <ProgressBar
-        style="@android:style/Widget.ProgressBar.Horizontal"
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar2"
-        android:layout_gravity="center_horizontal|top" />
-
-
+        android:layout_height="30dp"
+        android:id="@+id/progressBar"
+        android:visibility="gone"
+        android:layout_margin="3dp"
+         />
 </FrameLayout>

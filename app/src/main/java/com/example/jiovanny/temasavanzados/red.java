@@ -12,8 +12,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -21,7 +23,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class red extends AppCompatActivity {
-
+    private ProgressBar progressBar;
     WebView webEjemplo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,7 @@ public class red extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
+        progressBar=(ProgressBar)findViewById(R.id.progressBar2);
         /*Intent  i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
         startActivity(i);*/
         webEjemplo = (WebView) findViewById(R.id.webEjemplo);
@@ -48,6 +50,23 @@ public class red extends AppCompatActivity {
             nav.setContext(this);
             webEjemplo.setWebViewClient(nav);
             webEjemplo.loadUrl("http://es.wikipedia.org");
+            //habilitamos javascript y el zoom
+            webEjemplo.getSettings().setJavaScriptEnabled(true);
+            webEjemplo.getSettings().setBuiltInZoomControls(true);
+            webEjemplo.clearCache(true);
+            webEjemplo.setWebChromeClient(new WebChromeClient(){
+                @Override
+                public void onProgressChanged(WebView view, int newProgress) {
+                    super.onProgressChanged(view, newProgress);
+                    progressBar.setProgress(0);
+                    progressBar.setVisibility(View.VISIBLE);
+                    red.this.setProgress(newProgress*1000);
+                    progressBar.incrementProgressBy(newProgress);
+                    if (newProgress==100){
+                        progressBar.setVisibility(View.GONE);
+                    }
+                }
+            });
         } else {
             Toast.makeText(red.this, "Ocurrio un error al conectarse", Toast.LENGTH_SHORT).show();
             finish();
@@ -71,6 +90,7 @@ public class red extends AppCompatActivity {
 
 }
 class MiNavegador extends WebViewClient{
+
     private long tiempo;
     private Context context;
     public void setContext(Context c){
@@ -105,4 +125,5 @@ class MiNavegador extends WebViewClient{
         String tiempo= new SimpleDateFormat("mm:ss:SSS", Locale.getDefault()).format(date);
         Toast.makeText(context,tiempo,Toast.LENGTH_SHORT).show();*/
     }
+
 }
