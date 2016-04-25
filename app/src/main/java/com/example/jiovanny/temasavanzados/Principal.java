@@ -14,7 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class Principal extends AppCompatActivity {
-    ListView listTemas;
+    private ListView listTemas;
     private static final int ACCESO_RED = 0;
     private static final int ENCRIPTACION = 1;
     private static final int ACELEROMETRO = 2;
@@ -24,7 +24,7 @@ public class Principal extends AppCompatActivity {
     private static final int HILOS = 6;
     private static final int SERVICIO_WEB = 7;
     private static final String[] TEMAS = {"Acceso a la red", "Encriptacion", "Acelerometro", "Brujula", "GPS", "Mapas", "Hilos de ejecucion", "Servicios web"};
-
+    private Intent i;
 
 
     @Override
@@ -51,11 +51,12 @@ public class Principal extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case ACCESO_RED:
-                        Intent i = new Intent(getApplicationContext(), red.class);
+                        i = new Intent(getApplicationContext(), red.class);
                         startActivity(i);
                         break;
                     case ENCRIPTACION:
-
+                        i = new Intent(getApplicationContext(),Encriptacion.class);
+                        startActivity(i);
                         break;
 
                     case ACELEROMETRO:

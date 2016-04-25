@@ -26,7 +26,9 @@
         android:text="Encriptar"
         android:id="@+id/btnEncriptar"
         android:layout_gravity="center_horizontal"
-        android:textColor="#1d82e8" />
+        android:textColor="#1d82e8"
+        android:onClick="eventoEncriptar"
+        android:textAlignment="center" />
 
     <EditText
         android:layout_width="match_parent"
@@ -43,7 +45,9 @@
         android:layout_gravity="center_horizontal"
         android:textColor="@android:color/holo_green_dark"
         android:hint="Texto Encriptado"
-        android:singleLine="false" />
+        android:singleLine="false"
+        android:onClick="eventoEncriptar"
+        />
 
     <EditText
         android:layout_width="match_parent"
