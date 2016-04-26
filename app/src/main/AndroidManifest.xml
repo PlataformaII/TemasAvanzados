@@ -28,6 +28,10 @@
         <activity
             android:name=".Encriptacion"
             android:label="@string/title_activity_encriptacion"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Acelerometro"
+            android:label="@string/title_activity_acelerometro"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

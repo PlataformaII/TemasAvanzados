@@ -34,15 +34,6 @@ public class Principal extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         listTemas = (ListView) findViewById(R.id.listTemas);
         final ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, TEMAS);
         listTemas.setAdapter(adaptador);
@@ -60,7 +51,8 @@ public class Principal extends AppCompatActivity {
                         break;
 
                     case ACELEROMETRO:
-                        //Iniciar el uso de sensores de android
+                        i = new Intent(getApplicationContext(), Acelerometro.class);
+                        startActivity(i);
                         break;
 
                     case BRUJULA:

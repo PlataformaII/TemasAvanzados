@@ -3,4 +3,5 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_red">red</string>
     <string name="title_activity_encriptacion">Encriptacion</string>
+    <string name="title_activity_acelerometro">Acelerometro</string>
 </resources>
