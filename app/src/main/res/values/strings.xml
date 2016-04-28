@@ -4,4 +4,5 @@
     <string name="title_activity_red">red</string>
     <string name="title_activity_encriptacion">Encriptacion</string>
     <string name="title_activity_acelerometro">Acelerometro</string>
+    <string name="title_activity_mapas">Map</string>
 </resources>
