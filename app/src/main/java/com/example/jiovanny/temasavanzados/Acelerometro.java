@@ -1,17 +1,22 @@
 package com.example.jiovanny.temasavanzados;
 
+import android.annotation.TargetApi;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +26,9 @@ public class Acelerometro extends AppCompatActivity implements SensorEventListen
     long tiempo;
     boolean color;
     SensorManager manager;
+    MediaPlayer tono;
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +40,8 @@ public class Acelerometro extends AppCompatActivity implements SensorEventListen
         tiempo = System.currentTimeMillis();
         color = false;
         lblSensor.setBackgroundColor(Color.RED);
+        tono = MediaPlayer.create(this, R.raw.tono);
         manager = (SensorManager) getSystemService(SENSOR_SERVICE);
-
     }
 
     @Override
@@ -51,7 +58,9 @@ public class Acelerometro extends AppCompatActivity implements SensorEventListen
             if (resultado >= 2) {
                 long tiempoReal = event.timestamp;
                 if (tiempoReal - tiempo >= 500) {
+                    tono.start();
                     Toast.makeText(this,"Se agitó el dispositivo.",Toast.LENGTH_SHORT).show();
+
                     tiempo = tiempoReal;
                     if (color) {
                         lblSensor.setBackgroundColor(Color.RED);
@@ -72,14 +81,14 @@ public class Acelerometro extends AppCompatActivity implements SensorEventListen
 
     @Override
     protected void onPause() {
-        super.onPause();
         manager.unregisterListener(this);
+        super.onPause();
     }
 
     @Override
     protected void onResume() {
-        super.onResume();
         Sensor sensor = manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         manager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+        super.onResume();
     }
 }
