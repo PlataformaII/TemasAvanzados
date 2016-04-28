@@ -55,9 +55,10 @@ public class Acelerometro extends AppCompatActivity implements SensorEventListen
                     tiempo = tiempoReal;
                     if (color) {
                         lblSensor.setBackgroundColor(Color.RED);
-                    } else {
+                    }
+                    else {
                         lblSensor.setBackgroundColor(Color.GREEN);
-                        color = color;
+                        color = !color;
                     }
                 }
             }
@@ -67,5 +68,18 @@ public class Acelerometro extends AppCompatActivity implements SensorEventListen
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        manager.unregisterListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Sensor sensor = manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        manager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 }
